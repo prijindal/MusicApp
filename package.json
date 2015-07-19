@@ -2,9 +2,11 @@
   "name": "foundation-apps-template",
   "version": "1.1.0",
   "scripts": {
-    "start": "gulp"
+    "start": "gulp",
+    "postinstall": "bower install"
   },
   "devDependencies": {
+    "bower": "1.4.1",
     "front-router": "^1.0.0",
     "gulp": "^3.8.10",
     "gulp-autoprefixer": "^1.0.1",

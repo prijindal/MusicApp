@@ -1,0 +1,19 @@
+---
+name: albums
+url: /albums
+controller: albumsController
+---
+
+    			<div class="grid-block">
+            <div class="grid-block medium-up-3">
+              <div class="grid-content" ng-repeat="album in albums | filter:query">
+                <div class="card">
+                  <img ng-src="{{album.image}}" err-src="assets/img/placeholder.png"/>
+                  <div class="card-section">
+                    <h4><a ui-sref="artistdetails({artistname:album.artist})">{{album.artist}}</a></h4>
+                    <p><a ui-sref="albumdetails({albumname:album.album})">{{album.album}}</a></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>

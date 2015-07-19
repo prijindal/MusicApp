@@ -1,0 +1,15 @@
+            <div class="grid-block medium-up-3">
+              <div class="grid-content" ng-repeat="song in songs | filter:query">
+                <div class="card">
+                  <img ng-src="{{song.image}}" err-src="assets/img/placeholder.png"/>
+                  <div class="card-divider">
+                    <a ng-click="play(song)">{{song.title}}</a>
+                  </div>
+                  <div class="card-section">
+                    <h4><a ui-sref="artistdetails({artistname:song.artist})">{{song.artist}}</a></h4>
+                    <p><a ui-sref="albumdetails({albumname:song.album})">{{song.album}}</a></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>

@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en" ng-app="musicApplication">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Music</title>
+    <link href="/assets/css/app.css" rel="stylesheet" type="text/css">
+    <script src="/assets/js/foundation.js"></script>
+    <script src="/assets/js/templates.js"></script>
+    <script src="/assets/js/routes.js"></script>
+    <script src="http://127.0.0.1:8999/home/prijindal/foundation/projects/musicapp/client/assets/js/angular.audio.js"></script>
+    <script src="/assets/js/app.js"></script>
+  </head>
+  <body>
+    <!-- <div class="grid-frame" ui-view></div> -->
+    <div class="grid-frame vertical" ng-controller="defaultController">
+      <div class="grid-block">
+        <div id="left-nav" class="medium-2 grid-block vertical dark">
+          <div class="grid-content">
+            <ul class="dark vertical condense menu-bar full-width">
+              <li class="heading"><b>Categories</b></li>
+              <li><a ui-sref="songs">Songs</a></li>
+              <li><a ui-sref="artists">Artists</a></li>
+              <li><a ui-sref="albums">Albums</a></li>
+              <li class="divider"></li>
+              <li class="heading"><b>Playlists</b></li>
+              <li><a ui-sref="playlistdetails({playlistName:'playing'})">Now Playing</a></li>
+              <li><a ui-sref="playlistdetails({playlistName:'recent'})">Recently Played</a></li>
+            </ul>
+          </div>
+          <div class="grid-content shrink">
+            <input type="text" placeHolder="Search" ng-model="query">
+            <h5>Now Playing</h5>
+            <p>{{currPlaying.title}} by <a ui-sref="artistdetails({artistname:currPlaying.artist})">{{currPlaying.artist}}</a></p>
+          </div>
+        </div>
+        <div id="main" ui-view class="medium-8 grid-block">
+
+        </div>
+        <div id="playlist" class="medium-2 grid-block vertical">
+          <div class="grid-content shrink">
+            <p class="lead">Coming Up</p>
+          </div>
+          <div class="grid-content">
+            <ul class="vertical condense menu-bar full-width">
+              <li ng-repeat="song in comingUp"><a href="#" ng-click="playComing(song)">{{song.title}}</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="grid-block shrink dark">
+        <div class="small-12 medium-3 content">
+          <ul class="dark menu-bar">
+            <li ng-class="{true: 'active', false: ''}[repeatState]"><a href="#" ng-click="repeatState=!repeatState">Repeat</a></li>
+            <li ng-class="{true: 'active', false: ''}[shuffleState]"><a href="#" ng-click="shuffleState=!shuffleState">Shuffle</a></li>
+            <li><a><input type="range" ng-value="(audio.volume)*100" ng-model="volume" max="100" ng-change="audio.setVolume(volume/100)"></a></li>
+          </ul>
+        </div>
+
+        <div class="medium-6 content show-for-medium">
+          <ul class="dark menu-bar">
+            <li><a>
+              <progress value="{{audio.currentTime}}" max="{{audio.duration}}"></progress>
+            </a></li>
+          </ul>
+        </div>
+
+        <div class="medium-3 content show-for-medium">
+          <ul class="dark menu-bar">
+            <li><a href="#">{{audio.currentTime | trackTime}} / {{audio.duration | trackTime}}</a></li>
+            <li><a href="#" ng-click="previousSong()">Previous</a></li>
+            <li><a href="#" ng-init="Play" ng-click="toggleState()">{{({true: 'Play', false: 'Pause'}[audio.paused])||"Play"}}</a></li>
+            <li><a href="#" ng-click="nextSong()">Next</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

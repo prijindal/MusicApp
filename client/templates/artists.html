@@ -1,0 +1,18 @@
+---
+name: artists
+url: /artists
+controller: artistsController
+---
+
+          <div class="grid-block">
+            <div class="grid-block medium-up-3">
+              <div class="grid-content" ng-repeat="artist in artists | filter:query">
+                <div class="card">
+                  <img ng-src="{{artist.image}}" err-src="assets/img/placeholder.png"/>
+                  <div class="card-section">
+                    <h4><a ui-sref="artistdetails({artistname:artist.artist})">{{artist.artist}}</a></h4>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
